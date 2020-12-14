@@ -33,8 +33,8 @@
     "watch_core_dev": "webpack --env.buildType dev --env.platform core --watch"
   },
   "version": "1.8.20",
-  "name": "survey-library",
-  "private": true,
+  "name": "@acrossthecloud/survey-library",
+  "private": false,
   "devDependencies": {
     "@types/angular": "1.6.2",
     "@types/jquery": "2.0.39",
