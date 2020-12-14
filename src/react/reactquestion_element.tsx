@@ -1,9 +1,36 @@
-import * as React from "react";
+import React, { useState } from 'react';
+import MarkdownView from 'react-showdown';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Helpers } from "../helpers";
 import { LocalizableString } from "../localizablestring";
 import { Question } from "../question";
 import { ISurveyCreator } from "./reactquestion";
 import { Base, ITitleOwner, ArrayChanges } from "../base";
+
+const PopUpModal = (props) => {
+  const {
+    modalHeader,
+    modalBody
+  } = props;
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+  return (
+    <div>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>{modalHeader}</ModalHeader>
+        <ModalBody>
+          {modalBody}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>Ok</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
+}
 
 export class SurveyLocString extends React.Component<any, any> {
   constructor(props: any) {
@@ -29,11 +56,7 @@ export class SurveyLocString extends React.Component<any, any> {
   }
   render(): JSX.Element {
     if (!this.locStr) return null;
-    if (this.locStr.hasHtml) {
-      let htmlValue = { __html: this.locStr.renderedHtml };
-      return <span style={this.style} dangerouslySetInnerHTML={htmlValue} />;
-    }
-    return <span style={this.style}>{this.locStr.renderedHtml}</span>;
+    return (<span style={this.style}><MarkdownView markdown={this.locStr.text} components={{PopUpModal}}/></span>);
   }
 }
 
