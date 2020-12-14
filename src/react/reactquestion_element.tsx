@@ -7,11 +7,13 @@ import { Question } from "../question";
 import { ISurveyCreator } from "./reactquestion";
 import { Base, ITitleOwner, ArrayChanges } from "../base";
 
-const PopUpModal = (props) => {
-  const {
-    modalHeader,
-    modalBody
-  } = props;
+
+type PopUpModalProps = {
+  modalHeader: string,
+  modalBody: string
+}
+
+const PopUpModal = (props: PopUpModalProps) => {
 
   const [modal, setModal] = useState(false);
 
@@ -20,9 +22,11 @@ const PopUpModal = (props) => {
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{modalHeader}</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          <MarkdownView markdown={props.modalHeader} />
+        </ModalHeader>
         <ModalBody>
-          {modalBody}
+          <MarkdownView markdown={props.modalBody} />
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>Ok</Button>

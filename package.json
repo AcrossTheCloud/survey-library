@@ -100,6 +100,7 @@
     }
   },
   "dependencies": {
+    "@types/showdown": "^1.9.3",
     "react-showdown": "^2.1.0",
     "reactstrap": "^8.7.1",
     "signature_pad": "^2.3.2"
